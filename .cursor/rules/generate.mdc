@@ -1,0 +1,306 @@
+---
+alwaysApply: true
+---
+# 🎯 Project Rules - 무도짤아카이브 (Mudo Meme Library)
+
+## 📐 Architecture Rules
+
+### Framework & Structure
+- ✅ **Use Next.js 16+ App Router** exclusively for routing and page structure
+- ✅ **Server Components by default** - Only add `"use client"` when necessary (hooks, browser APIs, event handlers)
+- ✅ **File-based routing** - Follow Next.js App Router conventions (`app/` directory)
+- ✅ **TypeScript** - All new files must be TypeScript (`.ts` or `.tsx`)
+
+### Component Architecture
+- ✅ **Component composition** - Build complex UIs from smaller, reusable components
+- ✅ **Single Responsibility** - Each component should have one clear purpose
+- ✅ **Props interface** - Always define TypeScript interfaces for component props
+- ✅ **Client components** - Mark with `"use client"` at the top when using:
+  - React hooks (`useState`, `useEffect`, etc.)
+  - Browser APIs (`window`, `localStorage`, etc.)
+  - Event handlers (`onClick`, `onChange`, etc.)
+  - Context consumers
+
+### State Management
+- ✅ **Local state** - Use `useState` and `useEffect` for component-level state
+- ✅ **Server state** - Use TanStack Query for server data (when implemented)
+- ✅ **Direct Supabase calls** - Allowed for simple CRUD operations
+- ✅ **No global state library** - Avoid Redux/Zustand unless absolutely necessary
+- ✅ **Custom hooks** - Extract reusable state logic into custom hooks (`useUserRole`, `useToast`)
+
+### Data Fetching
+- ✅ **Supabase client** - Always use `@/integrations/supabase/client` for database operations
+- ✅ **Error handling** - Always handle errors and provide fallback to mock data
+- ✅ **Loading states** - Always show loading indicators during async operations
+- ✅ **Environment variables** - Use `NEXT_PUBLIC_` prefix for client-accessible env vars
+
+### File Organization
+```
+src/
+├── app/              # Next.js App Router pages
+├── components/       # React components
+│   └── ui/          # shadcn/ui components
+├── hooks/           # Custom React hooks
+├── lib/             # Utility functions
+├── types/           # TypeScript type definitions
+├── integrations/    # Third-party service integrations
+└── data/            # Mock data and constants
+```
+
+---
+
+## 🎨 Styling Rules
+
+### CSS Framework
+- ✅ **Tailwind CSS only** - Use Tailwind utility classes for all styling
+- ✅ **No inline styles** - Avoid `style={{}}` prop unless absolutely necessary
+- ✅ **CSS Variables** - Use design tokens from `globals.css` for colors, spacing, etc.
+- ✅ **Dark mode** - Support dark mode using `dark:` prefix and CSS variables
+
+### Component Styling
+- ✅ **shadcn/ui components** - Use existing UI components from `@/components/ui`
+- ✅ **cn() utility** - Always use `cn()` from `@/lib/utils` for conditional classes
+- ✅ **Responsive design** - Use Tailwind breakpoints (`sm:`, `md:`, `lg:`, `xl:`)
+- ✅ **Consistent spacing** - Use Tailwind spacing scale (4px increments)
+
+### Design System
+- ✅ **Color palette** - Use CSS variables defined in `globals.css`:
+  - `--primary`, `--secondary`, `--accent`
+  - `--background`, `--foreground`
+  - `--muted`, `--border`
+- ✅ **Typography** - Use Tailwind typography utilities
+- ✅ **Shadows** - Use custom shadow tokens (`shadow-card`, `shadow-hover`)
+- ✅ **Transitions** - Use `transition-smooth` class for animations
+
+### Styling Patterns
+```typescript
+// ✅ Good - Using cn() utility
+<div className={cn("base-classes", isActive && "active-classes", className)}>
+
+// ❌ Bad - String concatenation
+<div className={"base-classes " + (isActive ? "active-classes" : "")}>
+```
+
+---
+
+## 📝 Coding Conventions
+
+### TypeScript
+- ✅ **Type safety** - Define types for all props, functions, and data structures
+- ✅ **Interface over type** - Prefer `interface` for object shapes
+- ✅ **Type exports** - Export types from `src/types/` directory
+- ✅ **Avoid `any`** - Use `unknown` or proper types instead
+
+### Naming Conventions
+- ✅ **Components**: PascalCase (`MemeCard.tsx`, `DashboardLayout.tsx`)
+- ✅ **Hooks**: camelCase with `use` prefix (`useUserRole`, `useToast`)
+- ✅ **Functions**: camelCase (`fetchMemes`, `handleClick`)
+- ✅ **Constants**: UPPER_SNAKE_CASE or camelCase (`TOAST_LIMIT`, `mockMemes`)
+- ✅ **Types/Interfaces**: PascalCase (`Meme`, `Category`, `UserRole`)
+- ✅ **Files**: Match export name (component files = PascalCase, others = kebab-case)
+
+### Code Structure
+```typescript
+// ✅ Good - Proper structure
+"use client"; // If needed
+
+import { ... } from "...";
+import type { ... } from "...";
+
+interface ComponentProps {
+  // Props definition
+}
+
+export function Component({ prop1, prop2 }: ComponentProps) {
+  // Hooks
+  // State
+  // Effects
+  // Handlers
+  // Render
+}
+```
+
+### Import Order
+1. React and Next.js imports
+2. Third-party library imports
+3. Internal component imports
+4. Utility/helper imports
+5. Type imports (`import type { ... }`)
+6. Relative imports
+
+### Component Patterns
+- ✅ **Functional components** - Always use function components (not class components)
+- ✅ **Arrow functions** - Use for component exports: `export const Component = () => {}`
+- ✅ **Named exports** - Prefer named exports over default exports for components
+- ✅ **Props destructuring** - Destructure props in function parameters
+
+### Error Handling
+- ✅ **Try-catch blocks** - Always wrap async operations in try-catch
+- ✅ **Error logging** - Use `console.error()` for debugging
+- ✅ **User feedback** - Show toast notifications for errors using `toast.error()`
+- ✅ **Fallback data** - Provide mock data fallback when API fails
+
+### Comments & Documentation
+- ✅ **Korean comments** - Write comments in Korean for business logic
+- ✅ **English for code** - All code, variables, and functions in English
+- ✅ **JSDoc** - Add JSDoc comments for complex functions
+- ✅ **TODO comments** - Mark incomplete features with `// TODO: description`
+
+---
+
+## 🔐 Security & Best Practices
+
+### Authentication
+- ✅ **Supabase Auth** - Use Supabase authentication exclusively
+- ✅ **Session management** - Rely on Supabase session handling
+- ✅ **Protected routes** - Check authentication before sensitive operations
+- ✅ **Role-based access** - Use `useUserRole` hook for permission checks
+
+### Data Security
+- ✅ **RLS policies** - Database security handled by Supabase RLS
+- ✅ **Input validation** - Use Zod schemas for form validation
+- ✅ **Environment variables** - Never commit secrets to git
+- ✅ **Client-side validation** - Validate user input before API calls
+
+### Performance
+- ✅ **Image optimization** - Consider using Next.js `Image` component for better performance
+- ✅ **Code splitting** - Leverage Next.js automatic code splitting
+- ✅ **Lazy loading** - Use dynamic imports for heavy components
+- ✅ **Memoization** - Use `useMemo` and `useCallback` when appropriate
+
+---
+
+## 🧪 Testing & Quality
+
+### Code Quality
+- ✅ **ESLint** - Follow Next.js ESLint rules
+- ✅ **Type checking** - Ensure TypeScript compiles without errors
+- ✅ **Consistent formatting** - Maintain consistent code style
+- ✅ **No console.log** - Remove debug logs before committing (use `console.error` for errors)
+
+### Git Conventions
+- ✅ **Commit messages** - Write clear, descriptive commit messages
+- ✅ **Branch naming** - Use descriptive branch names (`feature/add-search`, `fix/auth-bug`)
+- ✅ **Small commits** - Make focused, atomic commits
+
+---
+
+## 📦 Dependencies
+
+### Adding New Dependencies
+- ✅ **Check existing** - Verify if similar functionality exists in current dependencies
+- ✅ **shadcn/ui first** - Prefer shadcn/ui components over new UI libraries
+- ✅ **TypeScript support** - Ensure library has TypeScript definitions
+- ✅ **Bundle size** - Consider impact on bundle size
+
+### Preferred Libraries
+- ✅ **UI Components**: shadcn/ui (Radix UI)
+- ✅ **Icons**: Lucide React
+- ✅ **Forms**: React Hook Form + Zod
+- ✅ **Notifications**: Sonner
+- ✅ **Date handling**: date-fns
+- ✅ **Charts**: Recharts (if needed)
+
+---
+
+## 🚫 Anti-Patterns to Avoid
+
+- ❌ **Don't use class components** - Use functional components only
+- ❌ **Don't mix state management** - Stick to one pattern (hooks, not Redux)
+- ❌ **Don't bypass TypeScript** - Avoid `as any` or `@ts-ignore`
+- ❌ **Don't hardcode values** - Use constants or environment variables
+- ❌ **Don't ignore errors** - Always handle error cases
+- ❌ **Don't create deep prop drilling** - Use composition or context if needed
+- ❌ **Don't use inline styles** - Use Tailwind classes instead
+- ❌ **Don't commit sensitive data** - No API keys, passwords, or secrets
+
+---
+
+## 📚 Project-Specific Conventions
+
+### Meme Data Structure
+```typescript
+interface Meme {
+  id: string;
+  imageUrl: string;
+  title: string;
+  episode: string;
+  quote: string;
+  category: Category;
+  tags: Emotion[];
+  likes: number;
+  isFavorite: boolean;
+}
+```
+
+### Category Types
+- Use predefined categories: `"유재석" | "박명수" | "정형돈" | "정준하" | "하하" | "노홍철" | "길" | "전체"`
+- Don't add new categories without updating the type definition
+
+### Image Handling
+- ✅ Store images in `public/` directory for static assets
+- ✅ Use Supabase Storage for user-uploaded images
+- ✅ Always provide `alt` text for images
+- ✅ Handle image loading errors gracefully
+
+### API Patterns
+```typescript
+// ✅ Good - Error handling with fallback
+const fetchMemes = async () => {
+  try {
+    const { data, error } = await supabase.from("memes").select("*");
+    if (error) {
+      console.error("Error:", error);
+      setMemes(mockMemes); // Fallback
+      return;
+    }
+    setMemes(data);
+  } catch (error) {
+    console.error("Error:", error);
+    setMemes(mockMemes);
+  }
+};
+```
+
+---
+
+## 🎯 Quick Reference
+
+### Path Aliases
+- `@/components` → `src/components`
+- `@/lib` → `src/lib`
+- `@/hooks` → `src/hooks`
+- `@/types` → `src/types`
+- `@/integrations` → `src/integrations`
+
+### Common Imports
+```typescript
+// Supabase
+import { supabase } from "@/integrations/supabase/client";
+
+// Types
+import type { Meme, Category } from "@/types/meme";
+
+// Utils
+import { cn } from "@/lib/utils";
+
+// Components
+import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
+
+// Hooks
+import { useUserRole } from "@/hooks/useUserRole";
+```
+
+### Environment Variables
+```env
+NEXT_PUBLIC_SUPABASE_URL=...
+NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=...
+```
+
+---
+
+**Last Updated**: 2025-11-17  
+**Project**: 무도짤아카이브 (Mudo Meme Library)  
+**Framework**: Next.js 16 + React 19 + TypeScript + Supabase
+

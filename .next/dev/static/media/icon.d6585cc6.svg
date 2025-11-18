@@ -1,0 +1,21 @@
+<svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Main body - dark rounded shape with irregular form -->
+  <path d="M16 3C22 3 27 5.5 29 10C30.5 13.5 30.5 17.5 29 21C27 25.5 22 28 16 28C10 28 5 25.5 3 21C1.5 17.5 1.5 13.5 3 10C5 5.5 10 3 16 3Z" fill="#5B2C6F"/>
+  
+  <!-- Crown on top right -->
+  <path d="M18 5L19 3L20 5L21 3.5L22 5L20.5 7L18 5Z" fill="#5B2C6F"/>
+  
+  <!-- Eyes - white circular dots -->
+  <circle cx="12" cy="12" r="2" fill="white"/>
+  <circle cx="20" cy="12" r="2" fill="white"/>
+  
+  <!-- Question mark mouth/nose - white cutout in bottom left -->
+  <path d="M9 19C9 17 10 15 12 15C14 15 15 17 15 19C15 21 13 23 11 23C9 23 7 21 7 19Z" fill="white"/>
+  <circle cx="11" cy="21" r="1.5" fill="#5B2C6F"/>
+  
+  <!-- Exclamation/emphasis marks upper left - three diagonal lines -->
+  <line x1="5" y1="5" x2="7" y2="7" stroke="#5B2C6F" stroke-width="2" stroke-linecap="round"/>
+  <line x1="4" y1="7" x2="6" y2="9" stroke="#5B2C6F" stroke-width="2" stroke-linecap="round"/>
+  <line x1="5" y1="9" x2="7" y2="11" stroke="#5B2C6F" stroke-width="2" stroke-linecap="round"/>
+</svg>
+

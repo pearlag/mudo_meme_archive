@@ -1,0 +1,20 @@
+<svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Main body - irregular rounded shape, dark purple/gray -->
+  <path d="M16 2.5C20.5 2.5 24.5 4 26.5 7.5C28 10 28.5 13.5 27.5 17C26.5 21 23 24 19 25.5C15 27 10.5 26.5 7 24.5C4 22.5 2 19 2 15.5C2 11.5 3.5 8 6 5.5C8.5 3 12 2.5 16 2.5Z" fill="#4A2C5F"/>
+  
+  <!-- Crown on top center-right - three pointed parts -->
+  <path d="M17 4L17.5 2.5L18.5 4L19.5 2.5L20.5 4L19.5 6.5L17 4Z" fill="#4A2C5F"/>
+  
+  <!-- Two white circular eyes on top -->
+  <circle cx="12.5" cy="11.5" r="1.8" fill="white"/>
+  <circle cx="19.5" cy="11.5" r="1.8" fill="white"/>
+  
+  <!-- Question mark mouth/nose - white cutout in bottom center-left -->
+  <path d="M10 20.5C10 18.5 11 16.5 13 16.5C15 16.5 16 18.5 16 20.5C16 22.5 14 24.5 12 24.5C10 24.5 8 22.5 8 20.5Z" fill="white"/>
+  <circle cx="11.5" cy="22.5" r="1.2" fill="#4A2C5F"/>
+  
+  <!-- Three diagonal emphasis lines on upper left -->
+  <line x1="5" y1="5" x2="7" y2="7" stroke="#4A2C5F" stroke-width="1.8" stroke-linecap="round"/>
+  <line x1="4" y1="7" x2="6" y2="9" stroke="#4A2C5F" stroke-width="1.8" stroke-linecap="round"/>
+  <line x1="5" y1="9" x2="7" y2="11" stroke="#4A2C5F" stroke-width="1.8" stroke-linecap="round"/>
+</svg>
