@@ -12,40 +12,77 @@ const SUPABASE_PUBLISHABLE_KEY = process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KE
 if (typeof window !== 'undefined' && (!SUPABASE_URL || !SUPABASE_PUBLISHABLE_KEY)) {
   console.warn(
     '⚠️ Supabase 환경 변수가 설정되지 않았습니다.',
-    '\n.env.local 파일에 다음을 추가하세요:',
+    '\nVercel 프로젝트 설정에서 다음 환경 변수를 추가하세요:',
     '\nNEXT_PUBLIC_SUPABASE_URL=your-project-url',
     '\nNEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=your-anon-key'
   );
 }
 
-// Import the supabase client like this:
-// import { supabase } from "@/integrations/supabase/client";
+// 환경 변수가 없으면 에러를 발생시키지 않고, 명확한 메시지 표시
+let supabaseClient: ReturnType<typeof createClient<Database>>;
 
-// 환경 변수가 없으면 클라이언트를 생성하지 않음 (에러를 명확히 하기 위해)
 if (!SUPABASE_URL || !SUPABASE_PUBLISHABLE_KEY) {
   console.error("❌ Supabase 환경 변수가 설정되지 않았습니다!");
-  console.error("SUPABASE_URL:", SUPABASE_URL || "(없음)");
-  console.error("SUPABASE_PUBLISHABLE_KEY:", SUPABASE_PUBLISHABLE_KEY ? "***" + SUPABASE_PUBLISHABLE_KEY.slice(-4) : "(없음)");
-}
-
-// 빈 문자열로 클라이언트를 생성하면 에러가 발생할 수 있으므로, 더미 값으로 초기화
-// 하지만 실제로는 환경 변수가 없으면 사용하지 않아야 함
-const safeUrl = SUPABASE_URL || 'https://placeholder.supabase.co';
-const safeKey = SUPABASE_PUBLISHABLE_KEY || 'placeholder-key';
-
-export const supabase = createClient<Database>(safeUrl, safeKey, {
-  auth: {
-    storage: typeof window !== 'undefined' ? window.localStorage : undefined,
-    persistSession: true,
-    autoRefreshToken: true,
-  }
-});
-
-// 클라이언트 초기화 확인 (개발 환경에서만)
-if (typeof window !== 'undefined' && process.env.NODE_ENV === 'development') {
-  if (safeUrl === SUPABASE_URL && safeKey === SUPABASE_PUBLISHABLE_KEY) {
+  console.error("Vercel 프로젝트 설정에서 다음 환경 변수를 추가하세요:");
+  console.error("  - NEXT_PUBLIC_SUPABASE_URL");
+  console.error("  - NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY");
+  
+  // 더미 클라이언트를 생성하되, 실제 사용 시 에러를 명확히 표시
+  const dummyUrl = 'https://placeholder.supabase.co';
+  const dummyKey = 'placeholder-key';
+  
+  supabaseClient = createClient<Database>(dummyUrl, dummyKey, {
+    auth: {
+      storage: typeof window !== 'undefined' ? window.localStorage : undefined,
+      persistSession: true,
+      autoRefreshToken: true,
+    }
+  });
+  
+  // 환경 변수가 없을 때는 모든 요청을 차단
+  const originalFrom = supabaseClient.from.bind(supabaseClient);
+  supabaseClient.from = function(table: any) {
+    console.error(`❌ Supabase 환경 변수가 설정되지 않아 "${table}" 테이블에 접근할 수 없습니다.`);
+    throw new Error('Supabase 환경 변수가 설정되지 않았습니다. Vercel 프로젝트 설정에서 환경 변수를 추가하세요.');
+  } as any;
+  
+  // auth 메서드도 차단
+  const originalAuth = supabaseClient.auth;
+  supabaseClient.auth = {
+    ...originalAuth,
+    signInWithPassword: async () => {
+      throw new Error('Supabase 환경 변수가 설정되지 않았습니다. Vercel 프로젝트 설정에서 환경 변수를 추가하세요.');
+    },
+    signUp: async () => {
+      throw new Error('Supabase 환경 변수가 설정되지 않았습니다. Vercel 프로젝트 설정에서 환경 변수를 추가하세요.');
+    },
+    signOut: async () => {
+      throw new Error('Supabase 환경 변수가 설정되지 않았습니다. Vercel 프로젝트 설정에서 환경 변수를 추가하세요.');
+    },
+    getSession: async () => {
+      return { data: { session: null }, error: null };
+    },
+    getUser: async () => {
+      return { data: { user: null }, error: null };
+    },
+    onAuthStateChange: () => {
+      return { data: { subscription: { unsubscribe: () => {} } } };
+    },
+  } as any;
+} else {
+  // 환경 변수가 정상적으로 설정된 경우
+  supabaseClient = createClient<Database>(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY, {
+    auth: {
+      storage: typeof window !== 'undefined' ? window.localStorage : undefined,
+      persistSession: true,
+      autoRefreshToken: true,
+    }
+  });
+  
+  // 클라이언트 초기화 확인 (개발 환경에서만)
+  if (typeof window !== 'undefined' && process.env.NODE_ENV === 'development') {
     console.log("✅ Supabase 클라이언트 초기화 완료");
-  } else {
-    console.warn("⚠️ Supabase 클라이언트가 Placeholder 값으로 초기화되었습니다.");
   }
 }
+
+export const supabase = supabaseClient;
