@@ -75,10 +75,17 @@ export default function HomePage() {
       }
 
       // 먼저 memes를 가져오고, 그 다음 profiles를 조회
+      console.log("🔍 데이터베이스에서 짤을 가져오는 중...");
       const { data: memesData, error: memesError } = await supabase
         .from("memes")
         .select("*")
         .order("created_at", { ascending: false });
+      
+      console.log("📥 쿼리 결과:", { 
+        dataLength: memesData?.length || 0, 
+        hasError: !!memesError,
+        error: memesError 
+      });
 
       if (memesError) {
         console.error("Error fetching memes:", {
@@ -146,6 +153,7 @@ export default function HomePage() {
 
       if (memesData && Array.isArray(memesData) && memesData.length > 0) {
         console.log(`✅ ${memesData.length}개의 짤을 불러왔습니다.`);
+        console.log('📊 데이터베이스에서 가져온 짤:', memesData);
         
         // localStorage에서 좋아요한 짤 목록 가져오기
         const likedMemes = typeof window !== 'undefined' 
@@ -164,12 +172,15 @@ export default function HomePage() {
           quote: dbMeme.quote,
           category: dbMeme.category as Category,
           tags: dbMeme.tags as any[],
-          likes: dbMeme.likes,
+          likes: dbMeme.likes || 0,
           isFavorite: likedMemes.includes(dbMeme.id),
           isSaved: savedMemes.includes(dbMeme.id),
           userId: dbMeme.user_id,
           userNickname: profilesMap.get(dbMeme.user_id) || undefined,
         }));
+        
+        console.log('🔄 변환된 DB 짤:', dbMemes);
+        console.log('👤 Profiles 맵:', Array.from(profilesMap.entries()));
         
         // Mock 데이터도 좋아요 및 저장 상태 적용
         const mockMemesWithLikes = availableMockMemes.map(meme => ({
@@ -178,6 +189,11 @@ export default function HomePage() {
           isSaved: savedMemes.includes(meme.id),
         }));
         
+        console.log('📦 Mock 데이터 개수:', mockMemesWithLikes.length);
+        console.log('📦 DB 데이터 개수:', dbMemes.length);
+        console.log('📦 전체 데이터 개수:', dbMemes.length + mockMemesWithLikes.length);
+        
+        // DB 데이터를 먼저 표시하고, 그 다음 Mock 데이터 표시
         setMemes([...dbMemes, ...mockMemesWithLikes]);
       } else {
         // 데이터베이스가 비어있거나 데이터가 없는 경우
