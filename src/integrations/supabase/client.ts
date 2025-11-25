@@ -5,8 +5,21 @@ import { createClient } from '@supabase/supabase-js';
 import type { Database } from './types';
 
 // Next.js에서는 process.env를 사용하고, 클라이언트에서 접근하려면 NEXT_PUBLIC_ 접두사가 필요합니다
+// 빌드 타임에 환경 변수가 번들에 포함되므로, 런타임에 확인 가능
 const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL || '';
 const SUPABASE_PUBLISHABLE_KEY = process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY || '';
+
+// 디버깅: 환경 변수 확인 (개발 환경에서만)
+if (typeof window !== 'undefined') {
+  console.log('🔍 환경 변수 확인:', {
+    hasUrl: !!SUPABASE_URL,
+    hasKey: !!SUPABASE_PUBLISHABLE_KEY,
+    urlLength: SUPABASE_URL.length,
+    keyLength: SUPABASE_PUBLISHABLE_KEY.length,
+    urlPreview: SUPABASE_URL ? `${SUPABASE_URL.substring(0, 20)}...` : '(없음)',
+    keyPreview: SUPABASE_PUBLISHABLE_KEY ? `${SUPABASE_PUBLISHABLE_KEY.substring(0, 10)}...` : '(없음)',
+  });
+}
 
 // 환경 변수가 설정되지 않은 경우 경고
 if (typeof window !== 'undefined' && (!SUPABASE_URL || !SUPABASE_PUBLISHABLE_KEY)) {
@@ -14,7 +27,8 @@ if (typeof window !== 'undefined' && (!SUPABASE_URL || !SUPABASE_PUBLISHABLE_KEY
     '⚠️ Supabase 환경 변수가 설정되지 않았습니다.',
     '\nVercel 프로젝트 설정에서 다음 환경 변수를 추가하세요:',
     '\nNEXT_PUBLIC_SUPABASE_URL=your-project-url',
-    '\nNEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=your-anon-key'
+    '\nNEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=your-anon-key',
+    '\n\n⚠️ 중요: 환경 변수를 추가한 후 반드시 "Redeploy"를 해야 합니다!'
   );
 }
 
