@@ -15,6 +15,7 @@ import {
   Search,
   User as UserIcon,
   Menu,
+  MessageSquare,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -39,6 +40,7 @@ import { useUserRole } from "@/hooks/useUserRole";
 import { supabase } from "@/integrations/supabase/client";
 import { useTheme } from "next-themes";
 import { Moon, Sun } from "lucide-react";
+import FuzzyText from "@/components/FuzzyText";
 
 interface DashboardLayoutProps {
   children: React.ReactNode;
@@ -175,6 +177,18 @@ export function DashboardLayout({
                       <span>좋아요</span>
                     </SidebarMenuButton>
                   </SidebarMenuItem>
+
+                  <SidebarMenuItem>
+                    <SidebarMenuButton
+                      onClick={() => {
+                        router.push("/guestbook");
+                      }}
+                      isActive={false}
+                    >
+                      <MessageSquare className="h-4 w-4" />
+                      <span>방명록</span>
+                    </SidebarMenuButton>
+                  </SidebarMenuItem>
                 </SidebarMenu>
               </SidebarGroupContent>
             </SidebarGroup>
@@ -213,7 +227,16 @@ export function DashboardLayout({
                 <div className="h-8 w-8 rounded bg-primary flex items-center justify-center">
                   <Image src="/favicon-32x32.png" alt="logo" width={32} height={32} />
                 </div>
-                <span className="font-semibold text-lg">무도짤아카이브</span>
+                <FuzzyText
+                  fontSize="1.125rem"
+                  fontWeight={600}
+                  color="hsl(var(--foreground))"
+                  enableHover={true}
+                  baseIntensity={0.1}
+                  hoverIntensity={0.3}
+                >
+                  무도짤아카이브
+                </FuzzyText>
               </div>
               <div className="flex-1 max-w-md">
                 <div className="relative">

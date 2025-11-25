@@ -1,12 +1,4 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-Based on src/app/index.css
-*/
-
-  :root {
+:root {
   --background: oklch(0.9399 0.0203 345.6985);
   --foreground: oklch(0.4712 0 0);
   --card: oklch(0.9498 0.0500 86.8891);
@@ -59,9 +51,9 @@ Based on src/app/index.css
   --shadow-2xl: 3px 3px 0px 0px hsl(325.7800 58.1800% 56.8600% / 2.50);
   --tracking-normal: 0em;
   --spacing: 0.25rem;
-  }
+}
 
-  .dark {
+.dark {
   --background: oklch(0.2497 0.0305 234.1628);
   --foreground: oklch(0.9306 0.0197 349.0785);
   --card: oklch(0.2902 0.0299 233.5352);
@@ -165,15 +157,4 @@ Based on src/app/index.css
   --shadow-lg: var(--shadow-lg);
   --shadow-xl: var(--shadow-xl);
   --shadow-2xl: var(--shadow-2xl);
-}
-
-@layer base {
-  * {
-    @apply border-border;
-  }
-
-  body {
-    @apply text-foreground;
-    font-family: var(--font-sans);
-  }
 }

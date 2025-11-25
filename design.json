@@ -1,0 +1,891 @@
+{
+    "designSystem": {
+      "palette": {
+        "core": {
+          "primary": "#2F7BFF",
+          "primarySoft": "#E4F0FF",
+          "primarySoftAlt": "#F0F6FF",
+          "primaryDark": "#1950C8",
+          "background": "#EAF4FF",
+          "backgroundAlt": "#F5FAFF",
+          "surface": "#FFFFFF",
+          "surfaceAlt": "#F7FBFF",
+          "borderSubtle": "#D8E4F2",
+          "borderStrong": "#C1D3EA",
+          "divider": "#E2ECF7"
+        },
+        "semantic": {
+          "success": "#18C27E",
+          "successSoft": "#E4FFF5",
+          "warning": "#FFB54A",
+          "warningSoft": "#FFF5E5",
+          "danger": "#F2545B",
+          "dangerSoft": "#FFE7EA",
+          "info": "#2F7BFF",
+          "infoSoft": "#E4F0FF"
+        },
+        "typography": {
+          "heading": "#172B4D",
+          "body": "#1D3248",
+          "muted": "#7C8FA8",
+          "placeholder": "#A5B6CC",
+          "onPrimary": "#FFFFFF",
+          "onSoft": "#1E293B"
+        },
+        "icon": {
+          "default": "#7C8FA8",
+          "active": "#2F7BFF",
+          "onPrimary": "#FFFFFF",
+          "softContainer": "#E4F0FF"
+        },
+        "charts": {
+          "positiveLine": "#18C27E",
+          "negativeLine": "#F2545B",
+          "axis": "#A5B6CC",
+          "grid": "#E2ECF7"
+        },
+        "overlays": {
+          "backdrop": "rgba(12, 22, 45, 0.40)"
+        },
+        "gradients": {
+          "appBackground": {
+            "type": "linear",
+            "angle": 135,
+            "stops": [
+              { "color": "#E0F0FF", "position": 0 },
+              { "color": "#F5FAFF", "position": 100 }
+            ]
+          },
+          "leftRail": {
+            "type": "linear",
+            "angle": 90,
+            "stops": [
+              { "color": "#2F7BFF", "position": 0 },
+              { "color": "#56A2FF", "position": 50 },
+              { "color": "#7CC2FF", "position": 100 }
+            ]
+          },
+          "metricCardAccent": {
+            "type": "linear",
+            "angle": 145,
+            "stops": [
+              { "color": "#F5FAFF", "position": 0 },
+              { "color": "#E4F0FF", "position": 100 }
+            ]
+          },
+          "primaryButton": {
+            "type": "linear",
+            "angle": 135,
+            "stops": [
+              { "color": "#2F7BFF", "position": 0 },
+              { "color": "#1950C8", "position": 100 }
+            ]
+          },
+          "dangerButton": {
+            "type": "linear",
+            "angle": 135,
+            "stops": [
+              { "color": "#F76D6D", "position": 0 },
+              { "color": "#E23A4A", "position": 100 }
+            ]
+          }
+        }
+      },
+      "typography": {
+        "families": {
+          "primary": "\"Inter\", system-ui, -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif"
+        },
+        "scale": {
+          "display": { "fontSize": 28, "lineHeight": 34, "fontWeight": 600 },
+          "h1": { "fontSize": 22, "lineHeight": 28, "fontWeight": 600 },
+          "h2": { "fontSize": 18, "lineHeight": 24, "fontWeight": 600 },
+          "h3": { "fontSize": 16, "lineHeight": 22, "fontWeight": 600 },
+          "body": { "fontSize": 14, "lineHeight": 20, "fontWeight": 400 },
+          "bodyStrong": { "fontSize": 14, "lineHeight": 20, "fontWeight": 500 },
+          "caption": { "fontSize": 12, "lineHeight": 16, "fontWeight": 400 },
+          "label": { "fontSize": 11, "lineHeight": 14, "fontWeight": 600 }
+        },
+        "usage": {
+          "appShellHeading": { "role": "h2", "color": "heading" },
+          "sectionTitle": { "role": "h3", "color": "body" },
+          "cardTitle": { "role": "h3", "color": "body" },
+          "metricValue": { "role": "display", "color": "heading" },
+          "metricLabel": { "role": "caption", "color": "muted", "transform": "uppercase", "letterSpacing": 0.08 },
+          "navItem": { "role": "bodyStrong", "color": "body" },
+          "navSubLabel": { "role": "caption", "color": "muted" },
+          "tableHeader": { "role": "caption", "color": "muted", "transform": "uppercase", "letterSpacing": 0.08 },
+          "tableCell": { "role": "body", "color": "body" },
+          "timestamp": { "role": "caption", "color": "muted" }
+        }
+      },
+      "radii": {
+        "full": 9999,
+        "xxl": 28,
+        "xl": 24,
+        "lg": 20,
+        "md": 16,
+        "sm": 12,
+        "xs": 8,
+        "pill": 9999
+      },
+      "shadows": {
+        "none": "none",
+        "softSm": "0 4px 12px rgba(24, 57, 110, 0.06)",
+        "softMd": "0 10px 30px rgba(24, 57, 110, 0.08)",
+        "softLg": "0 20px 60px rgba(24, 57, 110, 0.12)",
+        "focusRingPrimary": "0 0 0 2px rgba(47, 123, 255, 0.35)"
+      },
+      "elevation": {
+        "appShellPanel": "softMd",
+        "primaryCard": "softLg",
+        "secondaryCard": "softSm",
+        "popover": "softLg"
+      },
+      "animation": {
+        "durations": {
+          "fast": 120,
+          "normal": 200,
+          "slow": 280
+        },
+        "easings": {
+          "standard": "cubic-bezier(0.16, 1, 0.3, 1)",
+          "in": "cubic-bezier(0.32, 0, 0.67, 0)",
+          "out": "cubic-bezier(0.33, 1, 0.68, 1)"
+        }
+      },
+      "componentStyles": {
+        "appShell": {
+          "background": {
+            "type": "gradient",
+            "ref": "appBackground"
+          },
+          "layout": {
+            "maxWidth": 1440,
+            "paddingX": 32,
+            "paddingY": 24,
+            "gap": 24
+          },
+          "panels": {
+            "leftRail": {
+              "width": 80,
+              "surface": {
+                "type": "gradient",
+                "ref": "leftRail"
+              },
+              "radius": {
+                "topRight": 28,
+                "bottomRight": 28,
+                "topLeft": 0,
+                "bottomLeft": 0
+              },
+              "shadow": "softLg",
+              "content": {
+                "alignment": "center",
+                "avatarSize": 40,
+                "iconButton": {
+                  "size": 44,
+                  "radius": "full",
+                  "iconColor": "onPrimary",
+                  "stateStyles": {
+                    "default": {
+                      "backgroundColor": "transparent"
+                    },
+                    "hover": {
+                      "backgroundColor": "rgba(255,255,255,0.10)",
+                      "transform": "scale(1.02)"
+                    },
+                    "active": {
+                      "backgroundColor": "rgba(255,255,255,0.14)",
+                      "transform": "scale(0.98)"
+                    }
+                  }
+                }
+              }
+            },
+            "mainNav": {
+              "width": 240,
+              "surfaceColor": "#F5FAFF",
+              "borderRight": {
+                "color": "borderSubtle",
+                "width": 1
+              },
+              "radius": {
+                "topLeft": 28,
+                "bottomLeft": 28,
+                "topRight": 24,
+                "bottomRight": 24
+              },
+              "shadow": "softMd",
+              "sections": {
+                "headerSpacing": 24,
+                "sectionSpacing": 16,
+                "labelStyle": "navSubLabel"
+              },
+              "navItem": {
+                "height": 44,
+                "paddingX": 14,
+                "radius": 12,
+                "iconSize": 18,
+                "gap": 12,
+                "stateStyles": {
+                  "default": {
+                    "backgroundColor": "transparent",
+                    "labelColor": "muted",
+                    "iconColor": "icon.default"
+                  },
+                  "active": {
+                    "backgroundColor": "#FFFFFF",
+                    "labelColor": "body",
+                    "iconColor": "primary",
+                    "shadow": "softSm",
+                    "border": {
+                      "color": "borderSubtle",
+                      "width": 1
+                    }
+                  },
+                  "hover": {
+                    "backgroundColor": "rgba(255,255,255,0.65)",
+                    "labelColor": "body",
+                    "iconColor": "primary"
+                  },
+                  "disabled": {
+                    "backgroundColor": "transparent",
+                    "labelColor": "#C0CDDF",
+                    "iconColor": "#C0CDDF",
+                    "opacity": 0.6
+                  },
+                  "focus": {
+                    "outline": "focusRingPrimary"
+                  }
+                },
+                "badgeNotification": {
+                  "type": "dotWithCount",
+                  "size": 18,
+                  "radius": "pill",
+                  "backgroundColor": "danger",
+                  "textColor": "onPrimary"
+                }
+              }
+            }
+          }
+        },
+        "topBar": {
+          "surfaceColor": "transparent",
+          "layout": {
+            "height": 64,
+            "alignment": "center",
+            "gap": 24
+          },
+          "searchField": {
+            "width": 380,
+            "height": 44,
+            "radius": 9999,
+            "backgroundColor": "#FFFFFF",
+            "borderColor": "borderSubtle",
+            "borderWidth": 1,
+            "shadow": "softSm",
+            "iconColor": "muted",
+            "placeholderColor": "placeholder",
+            "textColor": "body",
+            "paddingX": 18,
+            "stateStyles": {
+              "default": {
+                "backgroundColor": "#FFFFFF"
+              },
+              "hover": {
+                "backgroundColor": "#F7FBFF",
+                "borderColor": "#C1D3EA"
+              },
+              "focus": {
+                "backgroundColor": "#FFFFFF",
+                "borderColor": "primary",
+                "shadow": "focusRingPrimary"
+              },
+              "disabled": {
+                "backgroundColor": "#F0F4FA",
+                "borderColor": "#D8E4F2",
+                "textColor": "#A5B6CC"
+              }
+            }
+          },
+          "windowControls": {
+            "closeButton": {
+              "size": 28,
+              "radius": "full",
+              "iconColor": "onPrimary",
+              "backgroundColor": "rgba(0,0,0,0.55)",
+              "hover": {
+                "backgroundColor": "rgba(0,0,0,0.70)",
+                "transform": "scale(1.02)"
+              },
+              "active": {
+                "transform": "scale(0.96)"
+              }
+            }
+          }
+        },
+        "cards": {
+          "primarySummary": {
+            "surface": {
+              "type": "solid",
+              "color": "#FFFFFF"
+            },
+            "radius": 24,
+            "shadow": "softLg",
+            "padding": 24,
+            "border": {
+              "width": 1,
+              "color": "borderSubtle"
+            },
+            "header": {
+              "avatarSize": 40,
+              "gap": 16,
+              "titleStyle": "cardTitle",
+              "subtitleStyle": "timestamp"
+            },
+            "metricRow": {
+              "gap": 24,
+              "metricCard": {
+                "surface": {
+                  "type": "gradient",
+                  "ref": "metricCardAccent"
+                },
+                "radius": 20,
+                "paddingX": 18,
+                "paddingY": 16,
+                "shadow": "softSm",
+                "border": {
+                  "width": 1,
+                  "color": "borderSubtle"
+                },
+                "iconContainer": {
+                  "size": 36,
+                  "radius": "full",
+                  "backgroundColor": "#FFFFFF",
+                  "shadow": "softSm",
+                  "iconColor": "primary"
+                },
+                "valueStyle": "metricValue",
+                "labelStyle": "metricLabel",
+                "trend": {
+                  "positiveColor": "success",
+                  "negativeColor": "danger",
+                  "background": "transparent"
+                }
+              }
+            },
+            "stateStyles": {
+              "default": {
+                "transform": "none"
+              },
+              "hover": {
+                "shadow": "softLg",
+                "transform": "translateY(-1px)",
+                "transition": "box-shadow 200ms cubic-bezier(0.16, 1, 0.3, 1), transform 200ms cubic-bezier(0.16, 1, 0.3, 1)"
+              }
+            }
+          },
+          "secondarySection": {
+            "surfaceColor": "#FFFFFF",
+            "radius": 24,
+            "shadow": "softMd",
+            "border": {
+              "width": 1,
+              "color": "borderSubtle"
+            },
+            "padding": 20,
+            "header": {
+              "titleStyle": "sectionTitle",
+              "actionLinkColor": "primary"
+            }
+          }
+        },
+        "tables": {
+          "caseListTable": {
+            "header": {
+              "backgroundColor": "transparent",
+              "textStyle": "tableHeader",
+              "textColor": "muted",
+              "borderBottom": {
+                "color": "divider",
+                "width": 1
+              }
+            },
+            "row": {
+              "height": 52,
+              "textStyle": "tableCell",
+              "borderBottom": {
+                "color": "divider",
+                "width": 1
+              },
+              "stateStyles": {
+                "default": {
+                  "backgroundColor": "transparent"
+                },
+                "hover": {
+                  "backgroundColor": "#F5FAFF"
+                },
+                "selected": {
+                  "backgroundColor": "#E4F0FF",
+                  "leftAccentBorder": {
+                    "width": 3,
+                    "color": "primary"
+                  }
+                },
+                "active": {
+                  "backgroundColor": "#E0EBFF"
+                },
+                "disabled": {
+                  "backgroundColor": "#F3F5F9",
+                  "textColor": "#A5B6CC"
+                },
+                "focus": {
+                  "outline": "focusRingPrimary"
+                }
+              },
+              "checkboxCell": {
+                "width": 36,
+                "checkbox": {
+                  "size": 18,
+                  "radius": 6,
+                  "borderColor": "borderStrong",
+                  "backgroundColor": "#FFFFFF",
+                  "iconColor": "onPrimary",
+                  "stateStyles": {
+                    "checked": {
+                      "backgroundColor": "primary",
+                      "borderColor": "primary"
+                    },
+                    "hoverUnchecked": {
+                      "borderColor": "primary"
+                    },
+                    "disabled": {
+                      "backgroundColor": "#E4ECF5",
+                      "borderColor": "#C6D4E5"
+                    }
+                  }
+                }
+              },
+              "statusPillCell": {
+                "pill": {
+                  "height": 24,
+                  "paddingX": 10,
+                  "radius": 9999,
+                  "textStyle": "caption",
+                  "variants": {
+                    "low": {
+                      "backgroundColor": "successSoft",
+                      "textColor": "success"
+                    },
+                    "medium": {
+                      "backgroundColor": "infoSoft",
+                      "textColor": "info"
+                    },
+                    "high": {
+                      "backgroundColor": "warningSoft",
+                      "textColor": "warning"
+                    }
+                  }
+                }
+              },
+              "attachmentCell": {
+                "iconColor": "primary",
+                "backgroundColor": "transparent"
+              },
+              "assigneeCell": {
+                "avatarSize": 28,
+                "initialsBackground": "#E4F0FF",
+                "initialsColor": "primaryDark"
+              }
+            }
+          }
+        },
+        "buttons": {
+          "primary": {
+            "radius": 9999,
+            "paddingX": 18,
+            "paddingY": 10,
+            "fontStyle": "bodyStrong",
+            "textTransform": "none",
+            "stateStyles": {
+              "default": {
+                "background": {
+                  "type": "gradient",
+                  "ref": "primaryButton"
+                },
+                "textColor": "onPrimary",
+                "shadow": "softSm"
+              },
+              "hover": {
+                "backgroundColor": "#1950C8",
+                "textColor": "onPrimary",
+                "shadow": "softMd",
+                "transform": "translateY(-1px)"
+              },
+              "active": {
+                "backgroundColor": "#143E9B",
+                "textColor": "onPrimary",
+                "shadow": "none",
+                "transform": "translateY(0)"
+              },
+              "disabled": {
+                "backgroundColor": "#C6D4E5",
+                "textColor": "#F5FAFF",
+                "shadow": "none",
+                "opacity": 0.7
+              },
+              "focus": {
+                "shadow": "focusRingPrimary"
+              },
+              "loading": {
+                "backgroundColor": "#1950C8",
+                "textColor": "rgba(255,255,255,0.7)",
+                "spinnerColor": "#FFFFFF"
+              }
+            }
+          },
+          "secondary": {
+            "radius": 9999,
+            "paddingX": 16,
+            "paddingY": 9,
+            "border": {
+              "width": 1,
+              "color": "borderStrong"
+            },
+            "stateStyles": {
+              "default": {
+                "backgroundColor": "#FFFFFF",
+                "textColor": "body",
+                "shadow": "softSm"
+              },
+              "hover": {
+                "backgroundColor": "#F5FAFF",
+                "borderColor": "primary"
+              },
+              "active": {
+                "backgroundColor": "#E4F0FF",
+                "borderColor": "primaryDark"
+              },
+              "disabled": {
+                "backgroundColor": "#F3F5F9",
+                "borderColor": "#D8E4F2",
+                "textColor": "#A5B6CC"
+              },
+              "focus": {
+                "shadow": "focusRingPrimary"
+              }
+            }
+          },
+          "ghost": {
+            "radius": 9999,
+            "paddingX": 12,
+            "paddingY": 8,
+            "stateStyles": {
+              "default": {
+                "backgroundColor": "transparent",
+                "textColor": "muted"
+              },
+              "hover": {
+                "backgroundColor": "rgba(255,255,255,0.6)",
+                "textColor": "body"
+              },
+              "active": {
+                "backgroundColor": "#E4F0FF",
+                "textColor": "body"
+              },
+              "disabled": {
+                "backgroundColor": "transparent",
+                "textColor": "#C0CDDF",
+                "opacity": 0.6
+              },
+              "focus": {
+                "shadow": "focusRingPrimary"
+              }
+            }
+          },
+          "icon": {
+            "size": 32,
+            "radius": "full",
+            "iconSize": 16,
+            "stateStyles": {
+              "default": {
+                "backgroundColor": "transparent",
+                "iconColor": "icon.default"
+              },
+              "hover": {
+                "backgroundColor": "#E4F0FF",
+                "iconColor": "icon.active"
+              },
+              "active": {
+                "backgroundColor": "#D2E3FF",
+                "iconColor": "icon.active"
+              },
+              "disabled": {
+                "backgroundColor": "transparent",
+                "iconColor": "#C0CDDF"
+              },
+              "focus": {
+                "shadow": "focusRingPrimary"
+              }
+            }
+          }
+        },
+        "inputs": {
+          "textField": {
+            "height": 40,
+            "radius": 12,
+            "backgroundColor": "#FFFFFF",
+            "borderColor": "borderSubtle",
+            "borderWidth": 1,
+            "paddingX": 12,
+            "textColor": "body",
+            "placeholderColor": "placeholder",
+            "stateStyles": {
+              "default": {
+                "backgroundColor": "#FFFFFF"
+              },
+              "hover": {
+                "backgroundColor": "#F7FBFF"
+              },
+              "focus": {
+                "borderColor": "primary",
+                "shadow": "focusRingPrimary"
+              },
+              "disabled": {
+                "backgroundColor": "#F3F5F9",
+                "borderColor": "#D8E4F2",
+                "textColor": "#A5B6CC"
+              },
+              "error": {
+                "borderColor": "danger",
+                "shadow": "0 0 0 1px rgba(242, 84, 91, 0.4)"
+              }
+            }
+          },
+          "filterChip": {
+            "height": 30,
+            "radius": 9999,
+            "paddingX": 12,
+            "textStyle": "caption",
+            "stateStyles": {
+              "default": {
+                "backgroundColor": "#F0F6FF",
+                "textColor": "muted"
+              },
+              "hover": {
+                "backgroundColor": "#E4F0FF",
+                "textColor": "body"
+              },
+              "active": {
+                "backgroundColor": "#2F7BFF",
+                "textColor": "onPrimary",
+                "shadow": "softSm"
+              },
+              "disabled": {
+                "backgroundColor": "#F3F5F9",
+                "textColor": "#C0CDDF"
+              }
+            }
+          }
+        },
+        "badges": {
+          "notificationDot": {
+            "size": 8,
+            "radius": "full",
+            "backgroundColor": "danger"
+          },
+          "notificationCount": {
+            "minWidth": 16,
+            "height": 16,
+            "radius": 9999,
+            "backgroundColor": "danger",
+            "textColor": "onPrimary",
+            "textStyle": "label"
+          },
+          "statusPill": {
+            "height": 22,
+            "radius": 9999,
+            "paddingX": 10,
+            "textStyle": "caption",
+            "variants": {
+              "success": {
+                "backgroundColor": "successSoft",
+                "textColor": "success"
+              },
+              "info": {
+                "backgroundColor": "infoSoft",
+                "textColor": "info"
+              },
+              "warning": {
+                "backgroundColor": "warningSoft",
+                "textColor": "warning"
+              },
+              "danger": {
+                "backgroundColor": "dangerSoft",
+                "textColor": "danger"
+              }
+            }
+          }
+        },
+        "avatars": {
+          "default": {
+            "size": 40,
+            "radius": "full",
+            "border": {
+              "width": 2,
+              "color": "surface"
+            },
+            "shadow": "softSm"
+          },
+          "small": {
+            "size": 28,
+            "radius": "full",
+            "border": {
+              "width": 1,
+              "color": "#FFFFFF"
+            }
+          }
+        },
+        "charts": {
+          "lineChart": {
+            "backgroundColor": "transparent",
+            "lineWidth": 2,
+            "radius": 12,
+            "positiveSeries": {
+              "lineColor": "positiveLine",
+              "fillGradient": {
+                "type": "linear",
+                "angle": 180,
+                "stops": [
+                  { "color": "rgba(24, 194, 126, 0.35)", "position": 0 },
+                  { "color": "rgba(24, 194, 126, 0.0)", "position": 100 }
+                ]
+              }
+            },
+            "negativeSeries": {
+              "lineColor": "negativeLine",
+              "fillGradient": {
+                "type": "linear",
+                "angle": 180,
+                "stops": [
+                  { "color": "rgba(242, 84, 91, 0.35)", "position": 0 },
+                  { "color": "rgba(242, 84, 91, 0.0)", "position": 100 }
+                ]
+              }
+            },
+            "axes": {
+              "labelColor": "muted",
+              "gridColor": "grid"
+            }
+          }
+        },
+        "overlays": {
+          "modalBackdrop": {
+            "backgroundColor": "backdrop"
+          },
+          "floatingPanel": {
+            "surfaceColor": "#FFFFFF",
+            "radius": 24,
+            "shadow": "softLg",
+            "borderColor": "borderSubtle",
+            "borderWidth": 1
+          }
+        }
+      },
+      "interactionStates": {
+        "scaleOnHover": {
+          "hover": {
+            "transform": "scale(1.02)",
+            "transition": "transform 200ms cubic-bezier(0.16, 1, 0.3, 1)"
+          },
+          "active": {
+            "transform": "scale(0.98)"
+          }
+        },
+        "elevateOnHover": {
+          "hover": {
+            "shadow": "softLg",
+            "transform": "translateY(-2px)"
+          },
+          "active": {
+            "shadow": "softSm",
+            "transform": "translateY(0)"
+          }
+        },
+        "fadeIn": {
+          "enter": {
+            "from": { "opacity": 0, "transform": "translateY(4px)" },
+            "to": { "opacity": 1, "transform": "translateY(0)" }
+          }
+        }
+      },
+      "accessibility": {
+        "contrastGuidelines": {
+          "primaryTextOnSurface": {
+            "foreground": "typography.heading",
+            "background": "core.surface",
+            "minRatio": 4.5
+          },
+          "mutedTextOnSurface": {
+            "foreground": "typography.muted",
+            "background": "core.surface",
+            "minRatio": 3
+          },
+          "textOnPrimary": {
+            "foreground": "typography.onPrimary",
+            "background": "core.primary",
+            "minRatio": 4.5
+          },
+          "statusPills": {
+            "foreground": [
+              "semantic.success",
+              "semantic.info",
+              "semantic.warning",
+              "semantic.danger"
+            ],
+            "background": [
+              "semantic.successSoft",
+              "semantic.infoSoft",
+              "semantic.warningSoft",
+              "semantic.dangerSoft"
+            ],
+            "minRatio": 3
+          }
+        },
+        "focusIndicators": {
+          "useFocusRingPrimaryOn": [
+            "buttons.primary",
+            "buttons.secondary",
+            "buttons.icon",
+            "inputs.textField",
+            "navigation.panels.mainNav.navItem",
+            "tables.caseListTable.row"
+          ],
+          "avoidRemovingOutline": true
+        }
+      },
+      "qualityAssurance": {
+        "avoid": [
+          "Applying background gradients intended for panels (e.g., appBackground, leftRail) to small elements like icons or pills.",
+          "Using onPrimary text color for generic body text on non-primary surfaces.",
+          "Placing drop shadows on inner content elements instead of their container cards or panels.",
+          "Mixing status pill semantic colors with generic tag or filter chip components.",
+          "Using muted text color for primary metrics or key actions."
+        ],
+        "ensure": [
+          "Apply elevation shadows only to high-level containers such as navigation panels, summary cards, and floating overlays.",
+          "Keep primary brand blue reserved for key actions, active navigation items, status indicators, and chart accents.",
+          "Maintain consistent corner radii by using defined tokens (xxl/xl/lg/md/sm/xs) for panels, cards, pills, and controls.",
+          "Respect interaction state matrices: every interactive element must define default, hover, active, focus, disabled, and (where relevant) loading states.",
+          "Validate contrast ratios for text against their background using the provided guidelines before shipping."
+        ],
+        "implementationNotes": [
+          "Navigation containers utilize the leftRail gradient, while summary and content cards use solid or soft gradient whites with subtle borders.",
+          "Primary call-to-action buttons use the primaryButton gradient token; secondary/utility buttons use flat white or soft blue surfaces with borders.",
+          "System icons default to muted icon color, switch to active icon color on hover/active, and invert to onPrimary when inside primary surfaces.",
+          "Shadows should be applied to the outermost wrapper of cards/panels; inner sections (tables, chart areas) remain mostly flat with subtle borders.",
+          "Interactive rows in tables change background only; borders and shadows remain consistent to avoid visual jitter."
+        ]
+      }
+    }
+  }

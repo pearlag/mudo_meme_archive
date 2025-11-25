@@ -1,0 +1,255 @@
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+  padding: 1rem;
+}
+
+/* Bento 스타일 그리드 - 1024px 이하 */
+@media (max-width: 1024px) {
+  .card-grid {
+    grid-template-columns: repeat(4, 1fr);
+    grid-auto-rows: minmax(200px, auto);
+    gap: 1rem;
+  }
+
+  /* 첫 번째 카드: 2x2 (큰 카드) */
+  .magic-bento-card:nth-child(6n + 1) {
+    grid-column: span 2;
+    grid-row: span 2;
+  }
+
+  /* 두 번째 카드: 1x1 (작은 카드) */
+  .magic-bento-card:nth-child(6n + 2) {
+    grid-column: span 1;
+    grid-row: span 1;
+  }
+
+  /* 세 번째 카드: 1x1 (작은 카드) */
+  .magic-bento-card:nth-child(6n + 3) {
+    grid-column: span 1;
+    grid-row: span 1;
+  }
+
+  /* 네 번째 카드: 2x1 (넓은 카드) */
+  .magic-bento-card:nth-child(6n + 4) {
+    grid-column: span 2;
+    grid-row: span 1;
+  }
+
+  /* 다섯 번째 카드: 1x2 (긴 카드) */
+  .magic-bento-card:nth-child(6n + 5) {
+    grid-column: span 1;
+    grid-row: span 2;
+  }
+
+  /* 여섯 번째 카드: 1x1 (작은 카드) */
+  .magic-bento-card:nth-child(6n + 6) {
+    grid-column: span 1;
+    grid-row: span 1;
+  }
+}
+
+/* 태블릿 크기 (768px - 1024px) */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .card-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .magic-bento-card:nth-child(6n + 1) {
+    grid-column: span 2;
+    grid-row: span 2;
+  }
+
+  .magic-bento-card:nth-child(6n + 2) {
+    grid-column: span 1;
+    grid-row: span 1;
+  }
+
+  .magic-bento-card:nth-child(6n + 3) {
+    grid-column: span 1;
+    grid-row: span 1;
+  }
+
+  .magic-bento-card:nth-child(6n + 4) {
+    grid-column: span 3;
+    grid-row: span 1;
+  }
+
+  .magic-bento-card:nth-child(6n + 5) {
+    grid-column: span 1;
+    grid-row: span 2;
+  }
+
+  .magic-bento-card:nth-child(6n + 6) {
+    grid-column: span 2;
+    grid-row: span 1;
+  }
+}
+
+.magic-bento-card {
+  position: relative;
+  border-radius: var(--radius-lg);
+  padding: 1rem;
+  min-height: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  overflow: hidden;
+  background: var(--card);
+  color: var(--card-foreground);
+  border: 1px solid var(--border);
+  --glow-x: 50%;
+  --glow-y: 50%;
+  --glow-intensity: 0;
+  --glow-radius: 300px;
+  --glow-color: 220, 100, 200;
+}
+
+.magic-bento-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(
+    circle at var(--glow-x) var(--glow-y),
+    rgba(var(--glow-color), calc(var(--glow-intensity) * 0.3)) 0%,
+    rgba(var(--glow-color), calc(var(--glow-intensity) * 0.15)) 30%,
+    transparent 70%
+  );
+  opacity: var(--glow-intensity);
+  pointer-events: none;
+  z-index: 1;
+  transition: opacity 0.3s ease;
+}
+
+.magic-bento-card--border-glow::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: inherit;
+  padding: 2px;
+  background: linear-gradient(
+    135deg,
+    rgba(var(--glow-color), calc(var(--glow-intensity) * 0.6)),
+    rgba(var(--glow-color), calc(var(--glow-intensity) * 0.3))
+  );
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: var(--glow-intensity);
+  pointer-events: none;
+  z-index: 2;
+}
+
+.magic-bento-card__header {
+  position: relative;
+  z-index: 3;
+  margin-bottom: 1rem;
+}
+
+.magic-bento-card__label {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  background: var(--muted);
+  border-radius: var(--radius-sm);
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--muted-foreground);
+  backdrop-filter: blur(10px);
+}
+
+.magic-bento-card__label:empty {
+  display: none;
+}
+
+.magic-bento-card__content {
+  position: relative;
+  z-index: 3;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.magic-bento-card__title {
+  font-size: 1rem;
+  font-weight: 700;
+  margin: 0 0 0.5rem 0;
+  color: var(--primary);
+  line-height: 1.2;
+}
+
+.magic-bento-card__description {
+  font-size: 0.875rem;
+  color: var(--muted-foreground);
+  margin: 0;
+  line-height: 1.5;
+}
+
+.magic-bento-card--text-autohide .magic-bento-card__title,
+.magic-bento-card--text-autohide .magic-bento-card__description {
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.magic-bento-card:hover .magic-bento-card--text-autohide .magic-bento-card__title,
+.magic-bento-card:hover .magic-bento-card--text-autohide .magic-bento-card__description {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.particle-container {
+  position: relative;
+  overflow: visible;
+}
+
+.particle {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 100;
+}
+
+.global-spotlight {
+  position: fixed;
+  width: 800px;
+  height: 800px;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 200;
+  opacity: 0;
+  transform: translate(-50%, -50%);
+  mix-blend-mode: screen;
+}
+
+/* 모바일 크기 (768px 이하) */
+@media (max-width: 768px) {
+  .card-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    padding: 0.5rem;
+  }
+
+  .magic-bento-card {
+    min-height: 150px;
+    padding: 1rem;
+    grid-column: span 1 !important;
+    grid-row: span 1 !important;
+  }
+
+  .magic-bento-card__title {
+    font-size: 1.25rem;
+  }
+}
+

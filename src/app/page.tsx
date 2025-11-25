@@ -10,6 +10,7 @@ import { DashboardLayout } from "@/components/DashboardLayout";
 import { CategoryFilter } from "@/components/CategoryFilter";
 import { MemeCard } from "@/components/MemeCard";
 import { MemeModal } from "@/components/MemeModal";
+import MagicBento from "@/components/MagicBento";
 import { UploadMemeDialog } from "@/components/UploadMemeDialog";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
@@ -105,7 +106,7 @@ export default function HomePage() {
       
       if (userIds.length > 0) {
         const { data: profilesData, error: profilesError } = await supabase
-          .from("profiles")
+          .from("profiles" as any)
           .select("id, nickname")
           .in("id", userIds);
 
@@ -531,9 +532,9 @@ export default function HomePage() {
       if (errorInfo.message) {
         errorMessage = String(errorInfo.message);
       } else if (errorInfo.stringValue && errorInfo.stringValue !== "[object Object]") {
-        errorMessage = errorInfo.stringValue;
+        errorMessage = String(errorInfo.stringValue);
       } else if (errorInfo.code) {
-        errorMessage = `에러 코드: ${errorInfo.code}`;
+        errorMessage = `에러 코드: ${String(errorInfo.code)}`;
       }
       
       toast.error(`삭제 중 오류가 발생했습니다: ${errorMessage}`);
@@ -625,23 +626,43 @@ export default function HomePage() {
                 <p className="text-xl text-muted-foreground">로딩 중...</p>
               </div>
             ) : filteredMemes.length > 0 ? (
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                {filteredMemes.map((meme) => {
-                  const isOwner = user && meme.userId === user.id;
-                  return (
-                    <MemeCard
-                      key={meme.id}
-                      meme={meme}
-                      onLike={handleLike}
-                      onClick={handleMemeClick}
-                      isAdmin={isAdmin}
-                      isOwner={isOwner}
-                      onEdit={handleEdit}
-                      onDelete={handleDelete}
-                    />
-                  );
-                })}
-              </div>
+              <MagicBento
+                cardData={filteredMemes.map((meme) => ({
+                  color: 'var(--card)',
+                  title: meme.title,
+                  description: meme.quote || meme.tags.join(', '),
+                  label: '',
+                  content: (
+                    <div className="w-full h-full flex flex-col">
+                      <h2 className="magic-bento-card__title mb-3">{meme.title}</h2>
+                      <div className="relative aspect-square overflow-hidden rounded-lg mb-3">
+                        <img
+                          src={meme.imageUrl}
+                          alt={meme.title}
+                          className="w-full h-full object-cover"
+                        />
+                      </div>
+                      <div className="flex items-center justify-between text-xs text-[var(--muted-foreground)] mt-auto">
+                        <span>{meme.likes.toLocaleString()} 좋아요</span>
+                        {meme.userNickname && <span>{meme.userNickname}</span>}
+                      </div>
+                    </div>
+                  )
+                }))}
+                enableStars={true}
+                enableSpotlight={true}
+                enableBorderGlow={true}
+                glowColor="220, 100, 200"
+                enableTilt={false}
+                enableMagnetism={true}
+                clickEffect={true}
+                onCardClick={(index) => {
+                  const meme = filteredMemes[index];
+                  if (meme) {
+                    handleMemeClick(meme);
+                  }
+                }}
+              />
             ) : (
               <div className="text-center py-20">
                 <p className="text-xl text-muted-foreground">검색 결과가 없습니다</p>
