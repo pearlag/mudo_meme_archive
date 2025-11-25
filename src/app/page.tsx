@@ -194,7 +194,13 @@ export default function HomePage() {
         console.log('📦 전체 데이터 개수:', dbMemes.length + mockMemesWithLikes.length);
         
         // DB 데이터를 먼저 표시하고, 그 다음 Mock 데이터 표시
-        setMemes([...dbMemes, ...mockMemesWithLikes]);
+        // DB 데이터가 있으면 DB 데이터를 우선 표시
+        const allMemes = dbMemes.length > 0 
+          ? [...dbMemes, ...mockMemesWithLikes]
+          : mockMemesWithLikes;
+        
+        console.log('✅ 최종 설정할 데이터 개수:', allMemes.length);
+        setMemes(allMemes);
       } else {
         // 데이터베이스가 비어있거나 데이터가 없는 경우
         console.log("데이터베이스에 짤이 없습니다. Mock 데이터를 사용합니다.");
